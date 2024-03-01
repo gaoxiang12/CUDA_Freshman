@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.9 FATAL_ERROR)
 Project(CUDA_Freshman CXX C CUDA)
-set(CMAKE_CUDA_FLAGS "-arch=compute_35 -g -G -O3")
+set(CMAKE_CUDA_FLAGS "-arch=native -g -G -O3")
 include_directories(./include)
+
+add_library(${PROJECT_NAME}.common
+    include/timer.cc
+)
+
 add_subdirectory(0_hello_world)
 add_subdirectory(1_check_dimension)
 add_subdirectory(2_grid_block)
