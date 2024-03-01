@@ -14,10 +14,12 @@ void sumArrays(float *a, float *b, float *res, const int size) {
 }
 
 /// GPU上的求和
+/// 核函数限制：只能访问device内存，返回void,没有静态变量
 __global__ void sumArraysGPU(float *a, float *b, float *res) {
     // int i=threadIdx.x;
-    /// blockIdx, blockDim, threadIdx都是cuda的built-in
+    // blockIdx, blockDim, threadIdx都是cuda的built-in
     // 级别：blockIdx, blockDim, threadIdx
+    // block和grid都为1时即等同于单线程
     int i = blockIdx.x * blockDim.x + threadIdx.x;
     res[i] = a[i] + b[i];
 }
